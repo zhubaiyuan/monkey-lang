@@ -41,6 +41,7 @@ const (
 	IF       = "IF"
 	ELSE     = "ELSE"
 	RETURN   = "RETURN"
+	MACRO    = "MACRO"
 )
 
 type Token struct {
