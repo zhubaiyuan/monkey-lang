@@ -48,6 +48,8 @@ func (vm *VM) Run() error {
 			if err != nil {
 				return err
 			}
+		case code.OpPop:
+			vm.pop()
 		case code.OpAdd:
 			right := vm.pop()
 			left := vm.pop()
