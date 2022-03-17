@@ -38,10 +38,11 @@ func runVmTests(t *testing.T, tests []vmTestCase) {
 		if err != nil {
 			t.Fatalf("vm error: %s", err)
 		}
-		stackElem := vm.StackTop()
+		stackElem := vm.LastPoppedStackElem()
 		testExpectedObject(t, tt.expected, stackElem)
 	}
 }
+
 func parse(input string) *ast.Program {
 	l := lexer.New(input)
 	p := parser.New(l)
