@@ -100,6 +100,12 @@ func (c *Compiler) Compile(node ast.Node) error {
 		if err != nil {
 			return err
 		}
+		// Emit an `OpJumpNotTruthy` with a bogus value
+		c.emit(code.OpJumpNotTruthy, 9999)
+		err = c.Compile(node.Consequence)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
