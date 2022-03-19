@@ -177,6 +177,26 @@ func TestCallingFunctionsWithoutArguments(t *testing.T) {
 	runVmTests(t, tests)
 }
 
+func TestFunctionsWithReturnStatement(t *testing.T) {
+	tests := []vmTestCase{
+		{
+			input: `
+		let earlyExit = fn() { return 99; 100; };
+		earlyExit();
+		`,
+			expected: 99,
+		},
+		{
+			input: `
+		let earlyExit = fn() { return 99; return 100; };
+		earlyExit();
+		`,
+			expected: 99,
+		},
+	}
+	runVmTests(t, tests)
+}
+
 type vmTestCase struct {
 	input    string
 	expected interface{}
