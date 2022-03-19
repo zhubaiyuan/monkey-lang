@@ -3,6 +3,7 @@ package compiler
 type SymbolScope string
 
 const (
+	LocalScope  SymbolScope = "LOCAL"
 	GlobalScope SymbolScope = "GLOBAL"
 )
 
@@ -13,8 +14,15 @@ type Symbol struct {
 }
 
 type SymbolTable struct {
+	Outer          *SymbolTable
 	store          map[string]Symbol
 	numDefinitions int
+}
+
+func NewEnclosedSymbolTable(outer *SymbolTable) *SymbolTable {
+	s := NewSymbolTable()
+	s.Outer = outer
+	return s
 }
 
 func NewSymbolTable() *SymbolTable {
