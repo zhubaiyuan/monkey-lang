@@ -550,6 +550,22 @@ func TestRecursiveFunctions(t *testing.T) {
 		`,
 			expected: 0,
 		},
+		{
+			input: `
+		let wrapper = fn() {
+			let countDown = fn(x) {
+				if (x == 0) {
+					return 0;
+				} else {
+					countDown(x - 1);
+				}
+			};
+			countDown(1);
+		};
+		wrapper();
+		`,
+			expected: 0,
+		},
 	}
 	runVmTests(t, tests)
 }
