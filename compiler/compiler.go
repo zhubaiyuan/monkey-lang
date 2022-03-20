@@ -21,9 +21,15 @@ func New() *Compiler {
 		lastInstruction:     EmittedInstruction{},
 		previousInstruction: EmittedInstruction{},
 	}
+	symbolTable := NewSymbolTable()
+	for i, v := range object.Builtins {
+		symbolTable.DefineBuiltin(i, v.Name)
+	}
 	return &Compiler{
-		constants: []object.Object{}, symbolTable: NewSymbolTable(),
-		scopes: []CompilationScope{mainScope}, scopeIndex: 0,
+		constants:   []object.Object{},
+		symbolTable: symbolTable,
+		scopes:      []CompilationScope{mainScope},
+		scopeIndex:  0,
 	}
 }
 
